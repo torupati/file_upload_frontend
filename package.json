@@ -1,0 +1,25 @@
+{
+  "name": "upload-interface",
+  "version": "1.0.0",
+  "description": "File upload interface with Firebase Authentication and Storage",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "firebase emulators:start",
+    "deploy": "firebase deploy",
+    "serve": "firebase serve"
+  },
+  "keywords": [
+    "firebase",
+    "storage",
+    "upload",
+    "authentication"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^10.14.1"
+  },
+  "devDependencies": {
+    "firebase-tools": "^13.0.0"
+  }
+}
