@@ -69,7 +69,7 @@ export const UploadSection = ({ user, onMessage }) => {
 
   const handleUpload = async () => {
     if (selectedFiles.length === 0) {
-      onMessage('ファイルを選択してください', 'error');
+      onMessage('Please select files', 'error');
       return;
     }
 
@@ -117,14 +117,14 @@ export const UploadSection = ({ user, onMessage }) => {
         });
       }
 
-      onMessage('すべてのファイルのアップロードが完了しました', 'success');
+      onMessage('All files uploaded successfully', 'success');
       setSelectedFiles([]);
       setProgress(0);
-      // ファイル入力をリセット
+      // Reset file input
       document.getElementById('fileInput').value = '';
     } catch (error) {
       console.error('Upload error:', error);
-      onMessage(`アップロードエラー: ${error.message}`, 'error');
+      onMessage(`Upload error: ${error.message}`, 'error');
     } finally {
       setUploading(false);
     }
@@ -137,7 +137,7 @@ export const UploadSection = ({ user, onMessage }) => {
   return (
     <div className="upload-section active">
       <div className="file-input-wrapper">
-        <label className="file-input-label">ファイルを選択</label>
+        <label className="file-input-label">Select Files</label>
         <input
           type="file"
           id="fileInput"
@@ -148,7 +148,7 @@ export const UploadSection = ({ user, onMessage }) => {
       </div>
 
       <button onClick={handleUpload} disabled={selectedFiles.length === 0 || uploading}>
-        {uploading ? 'アップロード中...' : 'アップロード'}
+        {uploading ? 'Uploading...' : 'Upload'}
       </button>
 
       {uploading && (
@@ -159,7 +159,7 @@ export const UploadSection = ({ user, onMessage }) => {
 
       {selectedFiles.length > 0 && (
         <div className="file-list">
-          <h3>選択されたファイル:</h3>
+          <h3>Selected Files:</h3>
           <div id="fileItems">
             {selectedFiles.map((file, index) => (
               <div key={index} className="file-item">

@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>📁 ファイルアップロード</h1>
+      <h1>📁 File Upload</h1>
 
       <AuthSection user={user} onLogin={login} onLogout={logout} loading={loading} />
 

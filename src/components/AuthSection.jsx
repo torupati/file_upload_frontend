@@ -15,7 +15,7 @@ export const AuthSection = ({ user, onLogin, onLogout, loading }) => {
   if (loading) {
     return (
       <div className="auth-section">
-        <p>読み込み中...</p>
+        <p>Loading...</p>
       </div>
     );
   }
@@ -25,12 +25,12 @@ export const AuthSection = ({ user, onLogin, onLogout, loading }) => {
       {user ? (
         <div className="user-info">
           <span>{user.email}</span>
-          <button onClick={onLogout}>ログアウト</button>
+          <button onClick={onLogout}>Logout</button>
         </div>
       ) : (
         <div id="loginSection">
           <button onClick={handleLogin} disabled={isLoggingIn}>
-            {isLoggingIn ? 'ログイン中...' : 'Googleでログイン'}
+            {isLoggingIn ? 'Logging in...' : 'Login with Google'}
           </button>
         </div>
       )}
