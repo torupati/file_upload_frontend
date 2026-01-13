@@ -1,5 +1,0 @@
-Firebase での設定
-
-Hosting
-
-storage

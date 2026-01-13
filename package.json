@@ -2,24 +2,31 @@
   "name": "upload-interface",
   "version": "1.0.0",
   "description": "File upload interface with Firebase Authentication and Storage",
-  "main": "src/app.js",
+  "type": "module",
   "scripts": {
-    "dev": "firebase emulators:start",
-    "deploy": "firebase deploy",
-    "serve": "firebase serve"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && firebase deploy"
   },
   "keywords": [
     "firebase",
     "storage",
     "upload",
-    "authentication"
+    "authentication",
+    "react",
+    "vite"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "firebase": "^10.14.1"
+    "firebase": "^10.14.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "firebase-tools": "^13.0.0"
+    "@vitejs/plugin-react": "^4.2.1",
+    "firebase-tools": "^13.0.0",
+    "vite": "^5.0.8"
   }
 }
