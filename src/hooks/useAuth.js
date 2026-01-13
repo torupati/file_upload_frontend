@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
 
 export const useAuth = () => {
@@ -8,6 +8,11 @@ export const useAuth = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Handle redirect result
+    getRedirectResult(auth).catch((err) => {
+      setError(err.message);
+    });
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
@@ -20,7 +25,8 @@ export const useAuth = () => {
     try {
       setError(null);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      // Use redirect mode (no COOP warning)
+      await signInWithRedirect(auth, provider);
     } catch (err) {
       setError(err.message);
       throw err;
