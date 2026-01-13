@@ -58,9 +58,15 @@ npm install
 cp .env.example .env
 ```
 
-`.env`ファイルを編集し、Firebase Consoleから取得した値を設定：
+1. プロジェクトルートに`.env`ファイルを作成：
 
-```env
+```bash
+cp .env.example .env
+```
+
+2. `.env`ファイルを開き、Firebase Consoleから取得した設定値で更新：
+
+```bash
 VITE_FIREBASE_API_KEY=あなたのAPIキー
 VITE_FIREBASE_AUTH_DOMAIN=あなたのプロジェクトID.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=あなたのプロジェクトID
@@ -69,7 +75,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=あなたのメッセージング送信者ID
 VITE_FIREBASE_APP_ID=あなたのアプリID
 ```
 
-> **注意:** `.env`ファイルは`.gitignore`に含まれており、Gitリポジトリにコミットされません。これにより、認証情報が公開されることを防ぎます。
+⚠️ **重要**: `.env`ファイルはGitにコミットしないでください。すでに`.gitignore`に含まれています。
 
 ### 5. Firebase CLIのインストールとログイン
 
@@ -123,8 +129,11 @@ npm run deploy
 ```
 upload_interface/
 ├── index.html          # メインHTML（アップロードUI）
+├── .env.example        # 環境変数のテンプレート
+├── .env                # Firebase設定（要作成、Gitにコミットしない）
 ├── src/
-│   ├── app.js         # Firebase初期化とメインロジック
+│   ├── firebase.js    # Firebase初期化（環境変数使用）
+│   ├── app.js         # メインロジック
 │   ├── auth.js        # 認証処理
 │   └── upload.js      # ファイルアップロード処理
 ├── storage.rules       # Storageセキュリティルール
