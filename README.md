@@ -19,6 +19,17 @@
 
 ## 🛠️ セットアップ手順
 
+> **⚠️ セキュリティ重要事項**
+> 
+> 以前のバージョンでFirebase認証情報がコードに直接記述されていた場合、それらの認証情報はGitの履歴に残っているため、**侵害されたものとみなす必要があります**。
+> 
+> **必須アクション:**
+> 1. Firebase Consoleで古いWebアプリを削除してください
+> 2. 新しいWebアプリを作成し、新しい認証情報を取得してください
+> 3. 新しい認証情報は環境変数として設定してください（以下の手順を参照）
+> 
+> Gitの履歴に残っている古い認証情報は、リポジトリにアクセスできる人なら誰でも閲覧可能です。セキュリティを確保するため、必ず新しい認証情報に切り替えてください。
+
 ### 1. 依存関係のインストール
 
 ```bash
@@ -38,20 +49,27 @@ npm install
 2. 「アプリを追加」→ Web（</>）を選択
 3. 表示されるFirebase設定をコピー
 
-### 4. Firebase設定の更新
+### 4. 環境変数の設定
 
-`src/app.js`のfirebaseConfigを更新：
+プロジェクトルートに`.env`ファイルを作成し、Firebase設定を環境変数として設定します：
 
-```javascript
-const firebaseConfig = {
-    apiKey: "あなたのAPIキー",
-    authDomain: "あなたのプロジェクトID.firebaseapp.com",
-    projectId: "あなたのプロジェクトID",
-    storageBucket: "あなたのプロジェクトID.appspot.com",
-    messagingSenderId: "あなたのメッセージング送信者ID",
-    appId: "あなたのアプリID"
-};
+```bash
+# .env.exampleをコピーして.envを作成
+cp .env.example .env
 ```
+
+`.env`ファイルを編集し、Firebase Consoleから取得した値を設定：
+
+```env
+VITE_FIREBASE_API_KEY=あなたのAPIキー
+VITE_FIREBASE_AUTH_DOMAIN=あなたのプロジェクトID.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=あなたのプロジェクトID
+VITE_FIREBASE_STORAGE_BUCKET=あなたのプロジェクトID.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=あなたのメッセージング送信者ID
+VITE_FIREBASE_APP_ID=あなたのアプリID
+```
+
+> **注意:** `.env`ファイルは`.gitignore`に含まれており、Gitリポジトリにコミットされません。これにより、認証情報が公開されることを防ぎます。
 
 ### 5. Firebase CLIのインストールとログイン
 
@@ -116,6 +134,15 @@ upload_interface/
 ```
 
 ## 🔒 セキュリティ
+
+### 認証情報の管理
+
+- **環境変数を使用:** Firebase認証情報は`.env`ファイルで管理され、コードには直接記述されません
+- **Gitから除外:** `.env`ファイルは`.gitignore`に含まれており、リポジトリにコミットされません
+- **認証情報の検証:** `src/firebase.js`で環境変数が正しく設定されているかを起動時に検証します
+- **認証情報のローテーション:** 認証情報が漏洩した場合は、Firebase Consoleで新しいWebアプリを作成し、環境変数を更新してください
+
+### アクセス制御
 
 - ユーザーは自分のフォルダ（`users/{userId}/`）にのみアクセス可能
 - Firebase Authenticationで認証必須
