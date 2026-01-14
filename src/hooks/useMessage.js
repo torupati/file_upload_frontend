@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useAuth = () => {
+export const useMessage = () => {
   const [message, setMessage] = useState({ text: '', type: '' });
 
   const showMessage = (text, type = 'success') => {

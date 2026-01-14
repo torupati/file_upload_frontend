@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthSection } from './components/AuthSection';
 import { UploadSection } from './components/UploadSection';
 import { useAuth } from './hooks/useAuth';
-import { useAuth as useMessage } from './hooks/useMessage';
+import { useMessage } from './hooks/useMessage';
 import './App.css';
 
 function App() {
